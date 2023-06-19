@@ -1,4 +1,11 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Alert,
+} from "react-native";
 import React, { useCallback, useState } from "react";
 import { Colors } from "../../constants/Colors";
 import ImagePicker from "./ImagePicker";
@@ -20,12 +27,15 @@ export default function PlaceForm({ createPlace }) {
   }
 
   const pickedLocationHandler = useCallback((location) => {
-    console.log(location, "LOCALIZAÇAO AQUI");
+    // console.log(location, "LOCALIZAÇAO AQUI");
     setPickedLocation(location);
   }, []);
 
   function savePlaceHandler() {
-    // if (!pickedLocation) return;
+    if (!enteredTitle || !selectedImage || !pickedLocation) {
+      Alert.alert("Invalid input");
+      return;
+    }
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
     console.log(placeData, "placeData");
     createPlace(placeData);
@@ -42,7 +52,9 @@ export default function PlaceForm({ createPlace }) {
           placeholder={"Title"}
         />
       </View>
+      <Text style={styles.label}>Take Image</Text>
       <ImagePicker onTakeImage={takeImageHandler} />
+      <Text style={styles.label}>Select Place</Text>
       <LocationPicker onPickedLocation={pickedLocationHandler} />
       <View style={styles.buttonContainer}>
         <ButtonCopy onPress={savePlaceHandler}>Add Place</ButtonCopy>
@@ -57,7 +69,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: "bold",
-    marginBottom: 4,
+    // marginBottom: 4,
     color: Colors.primary500,
     fontSize: 20,
   },
@@ -72,6 +84,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: Colors.primary800,
     placeholderTextColor: Colors.primary700,
+    marginBottom: 18,
   },
   buttonContainer: {
     marginBottom: 30,

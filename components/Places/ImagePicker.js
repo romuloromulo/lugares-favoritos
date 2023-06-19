@@ -7,7 +7,6 @@ import {
 } from "expo-image-picker";
 import { useState } from "react";
 import { Colors } from "../../constants/Colors";
-import OutlinedButton from "../UI/OutlinedButton";
 import ButtonCopy from "../UI/Button";
 
 function ImagePicker({ onTakeImage }) {
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   button: {
-    marginVertical: 20,
+    marginBottom: 20,
+    marginTop: 9,
   },
 });

@@ -66,7 +66,13 @@ export default function App({ navigation }) {
               // ),
             })}
           />
-          <Stack.Screen name="AddPlace" component={AddPlace} />
+          <Stack.Screen
+            name="AddPlace"
+            component={AddPlace}
+            options={{
+              title: "Add Place",
+            }}
+          />
           <Stack.Screen name="Map" component={Map} />
           <Stack.Screen
             name="PlaceDetails"
